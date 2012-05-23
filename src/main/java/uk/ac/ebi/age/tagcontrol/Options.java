@@ -1,4 +1,4 @@
-package uk.ac.ebi.biosd.tagcontrol;
+package uk.ac.ebi.age.tagcontrol;
 
 import org.kohsuke.args4j.Option;
 

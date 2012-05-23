@@ -1,8 +1,9 @@
-package uk.ac.ebi.biosd.tagcontrol;
+package uk.ac.ebi.age.tagcontrol;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -11,7 +12,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -87,7 +87,7 @@ public class TagControl
    nvps.add(new BasicNameValuePair("username", options.getUser()));
    nvps.add(new BasicNameValuePair("password", options.getPassword() != null ? options.getPassword() : ""));
 
-   httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+   httpost.setEntity(new UrlEncodedFormEntity(nvps, Consts.UTF_8));
 
    HttpResponse response = httpclient.execute(httpost);
 
@@ -116,11 +116,9 @@ public class TagControl
 
    ok = true;
   }
-  catch(Exception e)
+  catch(Throwable e)
   {
-   System.err.println("ERROR: Login failed: " + e.getMessage());
-   System.exit(3);
-   return;
+   System.err.println("ERROR: Login failed: " + e.getMessage()+" ("+e.getClass().getName()+")");
   }
   finally
   {
@@ -148,6 +146,8 @@ public class TagControl
 
    if( options.getTagStringDel() != null )
     nvps.add(new BasicNameValuePair(SubmissionConstants.SUBMISSON_TAGS_RM, options.getTagStringDel()));
+   
+   httpost.setEntity(new UrlEncodedFormEntity(nvps, Consts.UTF_8));
 
    HttpResponse response = httpclient.execute(httpost);
    
