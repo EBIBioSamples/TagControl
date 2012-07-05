@@ -138,7 +138,7 @@ public class TagControl
 
    List<NameValuePair> nvps = new ArrayList<NameValuePair>();
    nvps.add(new BasicNameValuePair(Constants.sessionKey, sessionKey));
-   nvps.add(new BasicNameValuePair(Constants.uploadHandlerParameter, Constants.SUBMISSION_TAGS_COMMAND));
+   nvps.add(new BasicNameValuePair(Constants.serviceHandlerParameter, Constants.SUBMISSION_TAGS_COMMAND));
    nvps.add(new BasicNameValuePair(SubmissionConstants.SUBMISSON_ID, options.getSubmissionIdList()));
 
    if( options.getTagStringAdd() != null )
